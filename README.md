@@ -41,9 +41,9 @@ scp -P 22 -i $(vagrant ssh-config | grep -m 1 IdentityFile | cut -d ' ' -f 4) va
 KUBECONFIG=kube.config kubectl get nodes
 
 NAME      STATUS    ROLES     AGE       VERSION
-master    Ready     master    35m       v1.10.0
-node1     Ready     <none>    30m       v1.10.0
-node2     Ready     <none>    28m       v1.10.0
+master    Ready     master    4m        v1.10.4
+node1     Ready     <none>    4m        v1.10.4
+node2     Ready     <none>    4m        v1.10.4
 
 --> Celebrate ;-)
 
@@ -52,15 +52,7 @@ KUBECONFIG=~/.kube/config:./kube.config kubectl config view --flatten --> config
 cp ~/.kube/config ~/.kube/config_backup
 cp config ~/.kube/config
 ```
-## List nodes
 
-```
-$ kubectl get nodes
-NAME      STATUS    ROLES     AGE       VERSION
-master    Ready     master    9m        v1.10.4
-node1     Ready     <none>    9m        v1.10.4
-node2     Ready     <none>    9m        v1.10.4
-```
 The `-j3` will cause three targets, in this VMs, to be started at the same time.
 
 ## Usage
