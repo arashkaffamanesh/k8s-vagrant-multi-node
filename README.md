@@ -28,6 +28,33 @@ NAME                 STATUS    MESSAGE              ERROR
 scheduler            Healthy   ok
 controller-manager   Healthy   ok
 etcd-0               Healthy   {"health": "true"}
+```
+
+## Copy kubeconfig to your machine
+```
+vagrant ssh master
+sudo -i
+chown vagrant /etc/kubernetes/admin.conf
+exit
+exit
+scp -P 22 -i $(vagrant ssh-config | grep -m 1 IdentityFile | cut -d ' ' -f 4) vagrant@192.168.26.10:/etc/kubernetes/admin.conf kube.config
+KUBECONFIG=kube.config kubectl get nodes
+
+NAME      STATUS    ROLES     AGE       VERSION
+master    Ready     master    35m       v1.10.0
+node1     Ready     <none>    30m       v1.10.0
+node2     Ready     <none>    28m       v1.10.0
+
+--> Celebrate ;-)
+
+N.B.: if you'd like to merge your kube.config with ~/.kube/config do the folowing:
+KUBECONFIG=~/.kube/config:./kube.config kubectl config view --flatten --> config
+cp ~/.kube/config ~/.kube/config_backup
+cp config ~/.kube/config
+```
+## List nodes
+
+```
 $ kubectl get nodes
 NAME      STATUS    ROLES     AGE       VERSION
 master    Ready     master    9m        v1.10.4
